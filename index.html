@@ -4,7 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilo para o vídeo como fundo */
+        /* Estilo do corpo com imagem de fundo inicial */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Texto branco para contraste */
+            background-color: #000; /* Fundo preto de fallback */
+            background-image: url('childhood-gaming-street-fighter-iv-arcade-moewalls-poster.jpg'); /* Imagem do vídeo */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Vídeo como fundo */
         .video-background {
             position: fixed;
             top: 0;
@@ -13,7 +31,7 @@
             height: 100%;
             overflow: hidden;
             z-index: -1; /* Coloca o vídeo atrás do conteúdo */
-            display: none; /* Oculta o vídeo até que ele carregue */
+            display: none; /* Oculta até que o vídeo carregue */
         }
 
         .video-background video {
@@ -25,21 +43,6 @@
             height: 100%;
             object-fit: cover; /* Ajusta o vídeo para evitar zoom */
             pointer-events: none; /* Impede qualquer interação */
-        }
-
-        /* Estilo do corpo */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            color: #fff; /* Texto branco para contraste */
-            background-color: #000; /* Fundo preto enquanto o vídeo não aparece */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
         }
 
         /* Fundo semitransparente contínuo para links */
@@ -82,7 +85,7 @@
     </style>
 </head>
 <body>
-    <!-- Container de fundo -->
+    <!-- Container do vídeo -->
     <div class="video-background" id="video-background">
         <video id="background-video" muted loop playsinline preload="auto">
             <source src="childhood-gaming-street-fighter-iv-arcade-moewalls-com.mp4" type="video/mp4">
@@ -123,6 +126,7 @@
                 video.play().then(() => {
                     console.log("Autoplay bem-sucedido!");
                     videoBackground.style.display = "block"; // Mostra o vídeo
+                    document.body.style.backgroundImage = "none"; // Remove a imagem de fundo
                     clearInterval(interval); // Para o loop quando o vídeo começar
                 }).catch(error => {
                     attempts++;
