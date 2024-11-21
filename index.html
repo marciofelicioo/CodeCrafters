@@ -4,22 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilo para o fundo */
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            color: #fff; /* Texto branco para contraste */
-            background-color: #000; /* Fundo preto enquanto o vídeo não aparece */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-
-        /* Vídeo como fundo */
+        /* Estilo para o vídeo como fundo */
         .video-background {
             position: fixed;
             top: 0;
@@ -42,11 +27,33 @@
             pointer-events: none; /* Impede qualquer interação */
         }
 
-        .table {
+        /* Estilo do corpo */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Texto branco para contraste */
+            background-color: #000; /* Fundo preto enquanto o vídeo não aparece */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* Fundo preto contínuo para links */
+        .link-container {
+            background-color: #000; /* Fundo preto opaco contínuo */
+            border-radius: 10px;
+            padding: 20px; /* Espaçamento interno */
             width: 80%;
             max-width: 600px;
+        }
+
+        .table {
+            width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
         }
 
         .table a {
@@ -55,9 +62,7 @@
             font-size: 1.2em;
             display: block;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semitransparente */
             padding: 10px;
-            border-radius: 5px;
         }
 
         .table a:hover {
@@ -65,7 +70,7 @@
         }
 
         .table td {
-            padding: 5px 0;
+            padding: 10px 0;
         }
 
         .table hr {
@@ -85,24 +90,26 @@
         </video>
     </div>
 
-    <!-- Bloco para os links com fundos semitransparentes -->
-    <table class="table">
-        <tr>
-            <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
-        </tr>
-        <tr>
-            <td><hr></td>
-        </tr>
-        <tr>
-            <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
-        </tr>
-        <tr>
-            <td><hr></td>
-        </tr>
-        <tr>
-            <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
-        </tr>
-    </table>
+    <!-- Bloco preto contínuo para os links -->
+    <div class="link-container">
+        <table class="table">
+            <tr>
+                <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
+            </tr>
+            <tr>
+                <td><hr></td>
+            </tr>
+            <tr>
+                <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
+            </tr>
+            <tr>
+                <td><hr></td>
+            </tr>
+            <tr>
+                <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
+            </tr>
+        </table>
+    </div>
 
     <!-- JavaScript para garantir autoplay e exibir o vídeo -->
     <script>
@@ -128,17 +135,8 @@
             }, 500); // Tenta a cada 500ms
 
             // Fallback para interações do usuário
-            document.addEventListener("click", () => {
-                video.play().then(() => {
-                    videoBackground.style.display = "block"; // Mostra o vídeo
-                });
-            });
-
-            document.addEventListener("touchstart", () => {
-                video.play().then(() => {
-                    videoBackground.style.display = "block"; // Mostra o vídeo
-                });
-            });
+            document.addEventListener("click", () => video.play());
+            document.addEventListener("touchstart", () => video.play());
         });
     </script>
 </body>
