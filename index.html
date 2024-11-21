@@ -82,7 +82,7 @@
 <body>
     <!-- Container de fundo -->
     <div class="video-background">
-        <video autoplay muted loop playsinline preload="auto">
+        <video id="background-video" muted loop playsinline preload="auto">
             <source src="lofi-boy-chilling-with-cat-moewalls-com.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -108,5 +108,29 @@
             </tr>
         </table>
     </div>
+
+    <!-- JavaScript para forçar o autoplay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const video = document.getElementById("background-video");
+
+            // Tenta iniciar o vídeo no carregamento
+            const tryPlayVideo = () => {
+                video.play().catch(error => {
+                    console.warn("Autoplay falhou. Tentando novamente...", error);
+                    // Define o vídeo como silenciado novamente e tenta reproduzir
+                    video.muted = true;
+                    video.play();
+                });
+            };
+
+            // Força a reprodução assim que a página carrega
+            tryPlayVideo();
+
+            // Adiciona um evento para reproduzir ao interagir com a página (fallback para iOS/Chrome)
+            document.addEventListener("click", () => tryPlayVideo());
+            document.addEventListener("touchstart", () => tryPlayVideo());
+        });
+    </script>
 </body>
 </html>
