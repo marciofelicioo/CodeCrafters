@@ -100,23 +100,26 @@
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const video = document.getElementById("background-video");
+            let attempts = 0;
 
-            // Tenta iniciar o vídeo no carregamento
-            const tryPlayVideo = () => {
-                video.play().catch(error => {
-                    console.warn("Autoplay falhou. Tentando novamente...", error);
-                    // Define o vídeo como silenciado novamente e tenta reproduzir
-                    video.muted = true;
-                    video.play();
+            // Tenta iniciar o vídeo continuamente até funcionar
+            const interval = setInterval(() => {
+                video.play().then(() => {
+                    console.log("Autoplay bem-sucedido!");
+                    clearInterval(interval); // Para o loop quando o vídeo começar
+                }).catch(error => {
+                    attempts++;
+                    console.warn(`Tentativa ${attempts} falhou:`, error);
+                    if (attempts >= 10) { // Para após 10 tentativas, por segurança
+                        clearInterval(interval);
+                        console.error("Não foi possível iniciar o autoplay após várias tentativas.");
+                    }
                 });
-            };
+            }, 500); // Tenta a cada 500ms
 
-            // Força a reprodução assim que a página carrega
-            tryPlayVideo();
-
-            // Adiciona um evento para reproduzir ao interagir com a página (fallback para iOS/Chrome)
-            document.addEventListener("click", () => tryPlayVideo());
-            document.addEventListener("touchstart", () => tryPlayVideo());
+            // Fallback para interações do usuário
+            document.addEventListener("click", () => video.play());
+            document.addEventListener("touchstart", () => video.play());
         });
     </script>
 </body>
