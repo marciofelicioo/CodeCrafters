@@ -4,7 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilo para o fundo da página com uma imagem */
+        /* Estilo para o vídeo como fundo */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Coloca o vídeo atrás do conteúdo */
+        }
+
+        .video-background video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta o vídeo para evitar zoom */
+            pointer-events: none; /* Impede qualquer interação */
+        }
+
+        /* Estilo do corpo e tabela */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -16,8 +38,6 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background: url('background-image.jpg') no-repeat center center fixed; /* Substitua pelo caminho da sua imagem */
-            background-size: contain; /* Exibe a imagem inteira sem cortes ou zoom */
         }
 
         .table {
@@ -55,23 +75,41 @@
     </style>
 </head>
 <body>
+    <!-- Container de fundo -->
+    <div class="video-background">
+        <video id="background-video" muted loop playsinline preload="auto">
+            <source src="travel-far-away-starry-night-sky-moewalls-com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
     <!-- Conteúdo principal -->
     <table class="table">
         <tr>
             <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
         </tr>
         <tr>
-            <td><hr></td>
-        </tr>
-        <tr>
             <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
-        </tr>
-        <tr>
-            <td><hr></td>
         </tr>
         <tr>
             <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
         </tr>
     </table>
+
+    <!-- JavaScript para garantir autoplay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("background-video");
+
+            // Força o autoplay
+            video.play().catch(error => {
+                console.warn("Autoplay falhou. Tentando corrigir...", error);
+
+                // Corrige problemas de autoplay
+                video.muted = true;
+                video.play();
+            });
+        });
+    </script>
 </body>
 </html>
