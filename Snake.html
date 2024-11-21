@@ -12,12 +12,15 @@
             margin: 0;
             padding: 0;
             color: #fff; /* Texto branco para contraste */
-            background-color: #000; /* Fundo preto enquanto o vídeo não aparece */
+            background-image: url('childhood-gaming-street-fighter-iv-arcade-moewalls-poster.jpg'); /* Imagem do vídeo */
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         /* Vídeo como fundo */
@@ -28,7 +31,7 @@
             width: 100%;
             height: 100%;
             overflow: hidden;
-            z-index: -1; /* Coloca o vídeo atrás de tudo */
+            z-index: -1; /* Coloca o vídeo atrás do conteúdo */
             display: none; /* Oculta até que o vídeo carregue */
         }
 
@@ -97,23 +100,29 @@
         document.addEventListener("DOMContentLoaded", function () {
             const videoContainer = document.getElementById("background-video-container");
             const video = document.getElementById("background-video");
-            let attempts = 0;
 
-            // Tenta iniciar o vídeo continuamente até funcionar
+            // Exibir o vídeo e ocultar a imagem de fundo
+            video.addEventListener("loadeddata", () => {
+                videoContainer.style.display = "block"; // Mostra o vídeo
+                document.body.style.backgroundImage = "none"; // Remove a imagem de fundo
+            });
+
+            let attempts = 0;
             const interval = setInterval(() => {
                 video.play().then(() => {
                     console.log("Autoplay bem-sucedido!");
                     videoContainer.style.display = "block"; // Mostra o vídeo
-                    clearInterval(interval); // Para o loop quando o vídeo começar
+                    document.body.style.backgroundImage = "none"; // Remove a imagem de fundo
+                    clearInterval(interval); // Para o loop
                 }).catch(error => {
                     attempts++;
                     console.warn(`Tentativa ${attempts} falhou:`, error);
-                    if (attempts >= 10) { // Para após 10 tentativas, por segurança
+                    if (attempts >= 10) {
                         clearInterval(interval);
                         console.error("Não foi possível iniciar o autoplay após várias tentativas.");
                     }
                 });
-            }, 500); // Tenta a cada 500ms
+            }, 500);
 
             // Fallback para interações do usuário
             document.addEventListener("click", () => video.play());
