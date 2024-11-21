@@ -5,24 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game with A* Algorithm</title>
     <style>
-        /* Estilo para o vídeo de fundo */
-        .background-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: -1; /* Coloca o vídeo atrás de tudo */
-        }
-
-        /* Estilo para o corpo */
+        /* Estilo para o fundo */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
             color: #fff; /* Texto branco para contraste */
+            background-color: #000; /* Fundo preto enquanto o vídeo não aparece */
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -30,19 +20,43 @@
             height: 100vh;
         }
 
+        /* Vídeo como fundo */
+        .background-video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Coloca o vídeo atrás de tudo */
+            display: none; /* Oculta até que o vídeo carregue */
+        }
+
+        .background-video-container video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ajusta o vídeo para evitar zoom */
+            pointer-events: none; /* Impede qualquer interação */
+        }
+
         /* Seção principal do conteúdo */
         .content {
             position: relative;
             z-index: 1; /* Coloca o conteúdo acima do vídeo de fundo */
-            background-color: rgba(0, 0, 0, 0.5); /* Fundo semitransparente */
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo semitransparente contínuo */
             padding: 20px;
             border-radius: 10px;
             max-width: 600px;
             width: 90%;
         }
 
+        /* Vídeo principal controlável */
         video {
-            width: 100%; /* O vídeo na seção ocupará toda a largura disponível */
+            width: 100%; /* O vídeo ocupará toda a largura do contêiner */
             border-radius: 10px;
         }
 
@@ -58,11 +72,13 @@
     </style>
 </head>
 <body>
-    <!-- Vídeo de fundo -->
-    <video class="background-video" autoplay muted loop>
-        <source src="lofi-boy-chilling-with-cat-moewalls-com.mp4" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
+    <!-- Container do vídeo de fundo -->
+    <div class="background-video-container" id="background-video-container">
+        <video id="background-video" muted loop playsinline preload="auto">
+            <source src="lofi-boy-chilling-with-cat-moewalls-com.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
 
     <!-- Conteúdo principal -->
     <div class="content">
@@ -75,5 +91,34 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel nisi id leo viverra sodales. Praesent at velit vitae ipsum viverra tincidunt non eu est.</p>
         <a href="index.html">Back to Home</a>
     </div>
+
+    <!-- JavaScript para garantir autoplay e exibir o vídeo -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const videoContainer = document.getElementById("background-video-container");
+            const video = document.getElementById("background-video");
+            let attempts = 0;
+
+            // Tenta iniciar o vídeo continuamente até funcionar
+            const interval = setInterval(() => {
+                video.play().then(() => {
+                    console.log("Autoplay bem-sucedido!");
+                    videoContainer.style.display = "block"; // Mostra o vídeo
+                    clearInterval(interval); // Para o loop quando o vídeo começar
+                }).catch(error => {
+                    attempts++;
+                    console.warn(`Tentativa ${attempts} falhou:`, error);
+                    if (attempts >= 10) { // Para após 10 tentativas, por segurança
+                        clearInterval(interval);
+                        console.error("Não foi possível iniciar o autoplay após várias tentativas.");
+                    }
+                });
+            }, 500); // Tenta a cada 500ms
+
+            // Fallback para interações do usuário
+            document.addEventListener("click", () => video.play());
+            document.addEventListener("touchstart", () => video.play());
+        });
+    </script>
 </body>
 </html>
