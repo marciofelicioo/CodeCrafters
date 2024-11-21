@@ -77,7 +77,7 @@
 <body>
     <!-- Container de fundo -->
     <div class="video-background">
-        <video autoplay muted loop playsinline>
+        <video id="background-video" muted loop playsinline>
             <source src="lofi-boy-chilling-with-cat-moewalls-com.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
@@ -95,5 +95,15 @@
             <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
         </tr>
     </table>
+
+    <!-- JavaScript para garantir autoplay -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const video = document.getElementById("background-video");
+            video.play().catch(error => {
+                console.error("Autoplay falhou:", error);
+            });
+        });
+    </script>
 </body>
 </html>
