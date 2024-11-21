@@ -63,14 +63,23 @@
             border-radius: 10px;
         }
 
-        a {
-            color: #00f4ff;
-            text-decoration: none;
-            font-weight: bold;
+        /* Estilo da seta */
+        .back-arrow {
+            display: inline-block;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-right: 15px solid #fff; /* Cor da seta branca */
+            margin-top: 20px;
+            cursor: pointer;
         }
 
-        a:hover {
-            text-decoration: underline;
+        a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -92,7 +101,8 @@
             Your browser does not support the video tag.
         </video>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel nisi id leo viverra sodales. Praesent at velit vitae ipsum viverra tincidunt non eu est.</p>
-        <a href="index.html">Back to Home</a>
+        <!-- Link com a seta para voltar -->
+        <a href="index.html" class="back-arrow"></a>
     </div>
 
     <!-- JavaScript para garantir autoplay e exibir o vídeo -->
