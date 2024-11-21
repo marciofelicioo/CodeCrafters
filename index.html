@@ -26,7 +26,7 @@
             pointer-events: none; /* Impede qualquer interação */
         }
 
-        /* Estilo do corpo e tabela */
+        /* Estilo do corpo */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -40,11 +40,18 @@
             height: 100vh;
         }
 
-        .table {
+        /* Bloco preto contínuo atrás dos links */
+        .link-container {
+            background-color: #000; /* Fundo preto opaco */
+            border-radius: 10px; /* Borda arredondada para todo o bloco */
+            padding: 20px 0; /* Espaçamento interno */
             width: 80%;
             max-width: 600px;
+        }
+
+        .table {
+            width: 100%;
             border-collapse: collapse;
-            margin: 20px 0;
         }
 
         .table a {
@@ -53,9 +60,7 @@
             font-size: 1.2em;
             display: block;
             text-align: center;
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semitransparente */
             padding: 10px;
-            border-radius: 5px;
         }
 
         .table a:hover {
@@ -63,13 +68,13 @@
         }
 
         .table td {
-            padding: 10px 10px;
+            padding: 5px 0;
         }
 
         .table hr {
             border: none;
             border-top: 1px solid #fff;
-            width: 50%; /* Linhas divisórias menores */
+            width: 80%; /* Aumenta o comprimento das linhas divisórias */
             margin: 0 auto; /* Centraliza as linhas */
         }
     </style>
@@ -77,39 +82,31 @@
 <body>
     <!-- Container de fundo -->
     <div class="video-background">
-        <video id="background-video" muted loop playsinline preload="auto">
-            <source src="travel-far-away-starry-night-sky-moewalls-com.mp4" type="video/mp4">
+        <video autoplay muted loop playsinline preload="auto">
+            <source src="lofi-boy-chilling-with-cat-moewalls-com.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
     </div>
 
-    <!-- Conteúdo principal -->
-    <table class="table">
-        <tr>
-            <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
-        </tr>
-        <tr>
-            <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
-        </tr>
-        <tr>
-            <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
-        </tr>
-    </table>
-
-    <!-- JavaScript para garantir autoplay -->
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const video = document.getElementById("background-video");
-
-            // Força o autoplay
-            video.play().catch(error => {
-                console.warn("Autoplay falhou. Tentando corrigir...", error);
-
-                // Corrige problemas de autoplay
-                video.muted = true;
-                video.play();
-            });
-        });
-    </script>
+    <!-- Bloco preto contínuo para os links -->
+    <div class="link-container">
+        <table class="table">
+            <tr>
+                <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
+            </tr>
+            <tr>
+                <td><hr></td>
+            </tr>
+            <tr>
+                <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
+            </tr>
+            <tr>
+                <td><hr></td>
+            </tr>
+            <tr>
+                <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
