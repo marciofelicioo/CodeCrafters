@@ -4,15 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilo do corpo com imagem de fundo inicial */
+        /* Estilo do corpo com fallback inicial preto */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
             color: #fff; /* Texto branco para contraste */
-            background-color: #000; /* Fundo preto de fallback */
-            background-image: url('childhood-gaming-street-fighter-iv-arcade-moewalls-poster.jpg'); /* Imagem do vídeo */
+            background-color: #000; /* Fundo preto inicial */
             background-size: cover;
             background-position: center;
             display: flex;
@@ -20,6 +19,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
+            overflow: hidden;
         }
 
         /* Vídeo como fundo */
@@ -114,12 +114,30 @@
         </table>
     </div>
 
-    <!-- JavaScript para garantir autoplay e exibir o vídeo -->
+    <!-- JavaScript para capturar o frame inicial e garantir autoplay -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const videoBackground = document.getElementById("video-background");
             const video = document.getElementById("background-video");
             let attempts = 0;
+
+            // Captura o primeiro frame do vídeo como fundo
+            video.addEventListener("loadeddata", () => {
+                const canvas = document.createElement("canvas");
+                const ctx = canvas.getContext("2d");
+
+                // Define o tamanho do canvas para o mesmo tamanho do vídeo
+                canvas.width = video.videoWidth;
+                canvas.height = video.videoHeight;
+
+                // Desenha o primeiro frame do vídeo no canvas
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                // Converte o canvas para uma imagem e define como fundo
+                const imgData = canvas.toDataURL();
+                document.body.style.backgroundImage = `url(${imgData})`;
+                console.log("Frame inicial capturado como fundo.");
+            });
 
             // Tenta iniciar o vídeo continuamente até funcionar
             const interval = setInterval(() => {
