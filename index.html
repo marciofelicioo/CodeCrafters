@@ -40,18 +40,11 @@
             height: 100vh;
         }
 
-        /* Bloco preto contínuo atrás dos links */
-        .link-container {
-            background-color: #000; /* Fundo preto opaco */
-            border-radius: 10px; /* Borda arredondada para todo o bloco */
-            padding: 20px 0; /* Espaçamento interno */
+        .table {
             width: 80%;
             max-width: 600px;
-        }
-
-        .table {
-            width: 100%;
             border-collapse: collapse;
+            margin: 20px 0;
         }
 
         .table a {
@@ -60,7 +53,9 @@
             font-size: 1.2em;
             display: block;
             text-align: center;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semitransparente */
             padding: 10px;
+            border-radius: 5px;
         }
 
         .table a:hover {
@@ -74,7 +69,7 @@
         .table hr {
             border: none;
             border-top: 1px solid #fff;
-            width: 80%; /* Aumenta o comprimento das linhas divisórias */
+            width: 80%; /* Comprimento das linhas divisórias */
             margin: 0 auto; /* Centraliza as linhas */
         }
     </style>
@@ -88,28 +83,20 @@
         </video>
     </div>
 
-    <!-- Bloco preto contínuo para os links -->
-    <div class="link-container">
-        <table class="table">
-            <tr>
-                <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
-            </tr>
-            <tr>
-                <td><hr></td>
-            </tr>
-            <tr>
-                <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
-            </tr>
-            <tr>
-                <td><hr></td>
-            </tr>
-            <tr>
-                <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
-            </tr>
-        </table>
-    </div>
+    <!-- Bloco para os links com fundos semitransparentes -->
+    <table class="table">
+        <tr>
+            <td><a href="bubble.html">Replica of Bubble Shooter</a></td>
+        </tr>
+        <tr>
+            <td><a href="Snake.html">Snake Game with A* Algorithm</a></td>
+        </tr>
+        <tr>
+            <td><a href="TrafficLights.html">Traffic Lights Simulation</a></td>
+        </tr>
+    </table>
 
-    <!-- JavaScript para forçar o autoplay -->
+    <!-- JavaScript para garantir autoplay -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const video = document.getElementById("background-video");
