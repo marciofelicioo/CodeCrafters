@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Estilo do corpo com imagem como fundo */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
-            color: #fff; /* Texto branco para contraste */
-            background-image: url('vlcsnap-2024-12-04-19h25m07s200.png'); /* Imagem do vídeo */
+            color: #fff;
+            background-image: url('vlcsnap-2024-12-04-19h25m07s200.png');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -22,7 +21,6 @@
             overflow: hidden;
         }
 
-        /* Vídeo como fundo */
         .video-background {
             position: fixed;
             top: 0;
@@ -40,15 +38,14 @@
             transform: translate(-50%, -50%);
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Ajusta o vídeo para evitar zoom */
-            pointer-events: none; /* Impede qualquer interação */
+            object-fit: cover; 
+            pointer-events: none;
         }
 
-        /* Fundo semitransparente contínuo para links */
         .link-container {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo preto semitransparente */
+            background-color: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            padding: 20px; /* Espaçamento interno */
+            padding: 20px;
             width: 80%;
             max-width: 600px;
         }
@@ -60,7 +57,7 @@
 
         .table a {
             text-decoration: none;
-            color: #fff; /* Letras brancas */
+            color: #fff;
             font-size: 1.2em;
             display: block;
             text-align: center;
@@ -78,13 +75,12 @@
         .table hr {
             border: none;
             border-top: 1px solid #fff;
-            width: 80%; /* Comprimento das linhas divisórias */
-            margin: 0 auto; /* Centraliza as linhas */
+            width: 80%;
+            margin: 0 auto;
         }
     </style>
 </head>
 <body>
-    <!-- Container do vídeo -->
     <div class="video-background" id="video-background">
         <video id="background-video" muted loop playsinline preload="auto">
             <source src="coding.mp4" type="video/mp4">
@@ -92,7 +88,6 @@
         </video>
     </div>
 
-    <!-- Bloco semitransparente para os links -->
 <div class="link-container">
     <table class="table">
         <tr>
@@ -113,9 +108,14 @@
         <tr>
             <td><hr></td>
         </tr>
-        <!-- Adicionado novo botão para Simple Calculator -->
         <tr>
             <td><a href="https://marciofelicioo.github.io/simple-calculator/">Simple Calculator</a></td>
+        </tr>
+        <tr>
+            <td><hr></td>
+        </tr>
+        <tr>
+            <td><a href="https://marciofelicioo.github.io/Little-Geography-Game/">Geography Quiz Game</a></td>
         </tr>
         <tr>
             <td><hr></td>
@@ -126,30 +126,27 @@
     </table>
 </div>
 
-    <!-- JavaScript para garantir autoplay e exibir o vídeo -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const videoBackground = document.getElementById("video-background");
             const video = document.getElementById("background-video");
             let attempts = 0;
 
-            // Tenta iniciar o vídeo continuamente até funcionar
             const interval = setInterval(() => {
                 video.play().then(() => {
                     console.log("Autoplay bem-sucedido!");
-                    videoBackground.style.display = "block"; // Mostra o vídeo
-                    clearInterval(interval); // Para o loop quando o vídeo começar
+                    videoBackground.style.display = "block";
+                    clearInterval(interval);
                 }).catch(error => {
                     attempts++;
                     console.warn(`Tentativa ${attempts} falhou:`, error);
-                    if (attempts >= 10) { // Para após 10 tentativas, por segurança
+                    if (attempts >= 10) {
                         clearInterval(interval);
                         console.error("Não foi possível iniciar o autoplay após várias tentativas.");
                     }
                 });
-            }, 500); // Tenta a cada 500ms
+            }, 500);
 
-            // Fallback para interações do usuário
             document.addEventListener("click", () => video.play());
             document.addEventListener("touchstart", () => video.play());
         });
