@@ -1,3 +1,3 @@
-# InProgress
+# CodeCrafters
 
-Check this out : https://marciofelicioo.github.io/CodeCrafters/
+Check this out : [CodeCrafters](https://marciofelicioo.github.io/CodeCrafters/)
